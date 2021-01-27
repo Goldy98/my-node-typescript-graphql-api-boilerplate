@@ -1,3 +1,7 @@
+//TODO: Change the database configuration (in config.json) to match yours
+//TODO: Change the server configuration (in config.json) to match yours
+//TODO: Change graphql introspection and playground  settings (in config.json)
+
 import { appLog, getConfig } from "./helpers/helper";
 import { Configuration } from "./helpers/types";
 import express, { Express } from "express";
@@ -7,6 +11,7 @@ import bodyParser = require("body-parser");
 import http from "http";
 import testRouter from "./routes/test.routes";
 import { setupGraphqlServer } from "./graphql/server";
+import { connectToDatabase } from "./helpers/db-utils";
 
 async function setup() {
   // Retrieve the sconfiguration
@@ -50,11 +55,11 @@ async function setup() {
     }
   });
 
+  await connectToDatabase();
+
   await setupGraphqlServer({ app, path: "/graphql", config });
 
   app.use("/", testRouter);
-
-  // connectToDatabase();
 
   const httpServer = http.createServer(app);
 

@@ -7,6 +7,7 @@ const typescriptPlugin = require("@graphql-codegen/typescript");
 const { GraphQLFileLoader } = require('@graphql-tools/graphql-file-loader');
 const { codegen } = require("@graphql-codegen/core");
 
+const chalk = require("chalk");
 
 const packageDir = resolve(__dirname, "..")
 const schemasDir = join(packageDir, "src", "gql-schemas")
@@ -43,5 +44,5 @@ const typeGenerationConfig = {
   console.info("--- Extracting GraphQL types ---");
   const output = await codegen(typeGenerationConfig);
   fs.writeFileSync(destFile, `/* eslint-disable */\n\n${output}`);
-  console.info("--- GraphQL types extracted ---");
+  console.log(chalk.bgGreenBright.black("--- GraphQL types extracted ---"));
 })().catch(err => console.log('err:', err));

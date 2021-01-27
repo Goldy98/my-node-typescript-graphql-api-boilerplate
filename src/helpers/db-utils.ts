@@ -7,12 +7,12 @@ import ladc from "ladc";
 export const packageDir = dirname(__dirname);
 export const conf = getConfig();
 
-export let cn: SBMainConnection | undefined = undefined;
+export let dbConnection: SBMainConnection | undefined = undefined;
 
-export function connectToDatabase() {
+export async function connectToDatabase() {
   try {
-    if (!cn)
-      cn = ladc({
+    if (!dbConnection) {
+      dbConnection = ladc({
         adapter: mysqlAdapter({
           mysqlConfig: conf.database
         }),
@@ -21,7 +21,16 @@ export function connectToDatabase() {
         }),
         logError: err => console.log(err)
       }) as SBMainConnection;
+
+      const dbConnectionTestResult = await dbConnection.all("SHOW TABLES");
+
+      if (dbConnectionTestResult) {
+        appLog("info", "Database connection established");
+        return;
+      }
+    }
   } catch (error) {
+    appLog("error", "Failed to connect to database due to " + error);
     console.log(error);
   }
 }

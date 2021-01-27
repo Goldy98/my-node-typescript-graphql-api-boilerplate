@@ -1,9 +1,9 @@
 import { sayHello } from "./queries";
 
 export const Query = {
-  helloWorld: _ => sayHello()
+  helloWorld: (_: any) => sayHello()
 };
 
 export const Mutation = {
-  onePlusOne: _ => 1 + 1
+  onePlusOne: (_: any) => 1 + 1
 };

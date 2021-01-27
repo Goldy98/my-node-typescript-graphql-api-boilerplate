@@ -1,8 +1,8 @@
 {
   "database": {
     "host": "127.0.0.1",
-    "port": 3308,
-    "database": "administrations.bj",
+    "port": 0,
+    "database": "",
     "user": "root",
     "password": ""
   },
