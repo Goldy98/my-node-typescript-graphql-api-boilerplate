@@ -29,7 +29,7 @@
     ├────────── types                # Typescript types definitions files generated from your graphql schema
     ├────── handlers                 # Handler for express routes
     ├────── helpers                  # Helpers functions
-    ├────── routes                   # Routes
+    ├────── routes                   # Express Routes
     ├── .gitignore
     ├── config.json                  # Configuration file for development environnement
     ├── config.production.json       # Configuration file for production environnement
